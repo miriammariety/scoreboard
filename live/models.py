@@ -9,7 +9,7 @@ class Cluster(models.Model):
 
 class Scores(models.Model):
     points = models.IntegerField(null=True, blank=True)
-    event = models.ForeignKey(Event, related_name='scores')
+    event = models.ForeignKey('Event', related_name='scores')
     cluster = models.ForeignKey(Cluster, related_name='scores')
 
 
