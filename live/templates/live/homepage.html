@@ -1,21 +1,7 @@
+{% extends 'scoreboard/base.html' %}
 {% load staticfiles %}
+{% block title %} Intrams 2016 | Home {% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"  type="text/css" media="projection, screen">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600italic,600,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-  <link href="{% static 'live/css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{% static 'live/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
-</head>
-<body>
-<div class="parallax-container">
-  <div class="parallax"><img src="{% static 'live/images/bannerphoto.png' %}" alt=""></div>
-</div>
-</body>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="{% static 'live/js/materialize.min.js' %}"></script>
-<script src="{% static 'live/js/init.js' %}"></script>
-</html>
+{% block content %}
+
+{% endblock %}
