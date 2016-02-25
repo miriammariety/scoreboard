@@ -1,0 +1,11 @@
+.navbar {
+	background-color: black;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.navbar li a:hover {
+    background-color: yellow;
+    color: black;
+
+}
