@@ -18,7 +18,6 @@ class EventAdmin(admin.ModelAdmin):
 
     def save_formset(self, request, form, formset, change):
         for form in formset:
-            form.instance.calculate_score()
             if form.instance.cluster_id:
                 form.instance.save()
         formset.save()

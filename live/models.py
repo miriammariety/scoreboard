@@ -60,7 +60,7 @@ class Score(models.Model):
         return '{0} points - {1} - {2}'.format(
             self.points, self.event, self.cluster)
 
-    def calculate_score(self):
+    def save(self, *args, **kwargs):
         place = self.place
         is_major = self.event.is_major
         if is_major:
@@ -68,3 +68,4 @@ class Score(models.Model):
         else:
             scores = [0, 15, 12, 9, 6]
         self.points = scores[place]
+        super(Score, self).save(*args, **kwargs)
