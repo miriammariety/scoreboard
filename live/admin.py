@@ -1,5 +1,5 @@
 from django.contrib import admin
-from live.models import Cluster, Event
+from live.models import Cluster, Event, Schedule
 
 
 class ScoreInline(admin.TabularInline):
@@ -7,9 +7,14 @@ class ScoreInline(admin.TabularInline):
     fields = ['cluster', 'place']
 
 
+class ScheduleInline(admin.TabularInline):
+    model = Schedule
+    fields = ['time']
+
+
 class EventAdmin(admin.ModelAdmin):
-    inlines = [ScoreInline]
-    list_display = ('name', 'location', 'begin_time', 'is_major', 'is_done')
+    inlines = [ScoreInline, ScheduleInline]
+    list_display = ('name', 'location', 'is_major', 'is_done')
 
     def save_related(self, request, form, formsets, change):
         form.save_m2m()
@@ -18,7 +23,7 @@ class EventAdmin(admin.ModelAdmin):
 
     def save_formset(self, request, form, formset, change):
         for form in formset:
-            if form.instance.cluster_id:
+            if getattr(form.instance, 'cluster_id', False):
                 form.instance.save()
         formset.save()
 

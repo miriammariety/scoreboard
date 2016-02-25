@@ -18,8 +18,6 @@ class Event(models.Model):
                             help_text='The name of the event.')
     location = models.CharField(max_length=30,
                                 help_text='The location of the event.')
-    begin_time = models.DateTimeField(
-        help_text='The begin time and date of the event.')
     is_major = models.BooleanField(
         help_text='A boolean to represent whether this '
                   'event is a major event.')
@@ -69,3 +67,9 @@ class Score(models.Model):
             scores = [0, 15, 12, 9, 6]
         self.points = scores[place]
         super(Score, self).save(*args, **kwargs)
+
+
+class Schedule(models.Model):
+    event = models.ForeignKey('Event', related_name='schedules',
+                              help_text='The event related to this schedule.')
+    time = models.DateTimeField(help_text='The time of the event.')
