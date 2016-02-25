@@ -31,13 +31,40 @@ class Event(models.Model):
 
 
 class Score(models.Model):
+    NONE = 0
+    FIRST = 1
+    SECOND = 2
+    THIRD = 3
+    FOURTH = 4
+    PLACES = (
+        (NONE, 'None'),
+        (FIRST, '1st Place'),
+        (SECOND, '2nd Place'),
+        (THIRD, '3rd Place'),
+        (FOURTH, '4th Place')
+    )
     points = models.SmallIntegerField(
         default=0, help_text='The points earned.')
     cluster = models.ForeignKey('Cluster', related_name='scores',
                                 help_text='The cluster this score belongs to.')
     event = models.ForeignKey(
         'Event', help_text='The event this score comes from.')
+    place = models.SmallIntegerField(
+        choices=PLACES, default=NONE,
+        help_text='The cluster\'s placement in this event.')
+
+    class Meta:
+        unique_together = (('event', 'place'), ('event', 'cluster'))
 
     def __unicode__(self):
         return '{0} points - {1} - {2}'.format(
             self.points, self.event, self.cluster)
+
+    def calculate_score(self):
+        place = self.place
+        is_major = self.event.is_major
+        if is_major:
+            scores = [0, 30, 25, 20, 15]
+        else:
+            scores = [0, 15, 12, 9, 6]
+        self.points = scores[place]
