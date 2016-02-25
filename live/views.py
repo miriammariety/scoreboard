@@ -3,3 +3,6 @@ from django.views.generic import TemplateView
 
 class HomeView(TemplateView):
     template_name = 'live/homepage.html'
+
+class ScheduleView(TemplateView):
+    template_name = 'live/schedule.html'

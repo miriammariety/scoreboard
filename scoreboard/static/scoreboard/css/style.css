@@ -5,7 +5,31 @@
 }
 
 .navbar li a:hover {
-    background-color: yellow;
-    color: black;
+    background-color: maroon;
+    color: white;
+}
 
+.tabs {
+	background-color: whitesmoke;
+}
+
+ul.tabs > li.tab > a {
+    color: grey;
+    font-weight: 600;
+}
+
+ul.tabs > li.tab > a:hover {
+    color: black;
+    font-weight: 600;
+}
+
+ul.tabs > div.indicator {
+    height: 5px;
+    background-color: grey;
+}
+
+.schedule-container {
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-left: 50px;
 }

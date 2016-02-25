@@ -1,0 +1,63 @@
+{% extends 'scoreboard/base.html' %}
+{% load staticfiles %}
+{% block title %} Intrams 2016 | Home {% endblock %}
+
+{% block content %}
+<div>
+  <ul class="tabs">
+    <li id="majorg-tab" class="tab col s6">
+      <a href="#majorg" class="active">Major Games</a>
+    </li>
+    <li id="minorg-tab" class="tab col s6">
+      <a href="#minorg" class="active">Minor Games</a>
+    </li>
+  </ul>
+  <div class="schedule-container">
+    <div id="majorg" class="col s12">
+      <ul class="collapsible popout" data-collapsible="expandable">
+        <li>
+          <div class="collapsible-header">Arnis</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Basketball</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Cheerdance</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Dance Fusion</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Hataw Fitness</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Parade</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Pinoy Games</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Soccer</div>
+          <div></div>
+        </li>
+        <li>
+          <div class="collapsible-header">Volley</div>
+          <div></div>
+        </li>
+      </ul>
+    </div>
+    <div id="minorg" class="col s12">
+      <ul class="collapsible popout" data-collapsible="expandable">
+
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
