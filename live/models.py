@@ -22,6 +22,9 @@ class Event(models.Model):
     start_time = models.DateTimeField(
         help_text='The start time of this event.')
 
+    def __unicode__(self):
+        return self.name
+
 
 class Match(models.Model):
     event = models.ForeignKey(
@@ -44,6 +47,10 @@ class Match(models.Model):
 
     class Meta:
         verbose_name_plural = 'matches'
+
+    def __unicode__(self):
+        return '{left} v.s. {right} - {event}'.format(
+            left=self.left, right=self.right, event=self.event)
 
 
 class Rank(models.Model):
