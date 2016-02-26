@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
 
 
 class Cluster(models.Model):
@@ -13,6 +14,16 @@ class Cluster(models.Model):
         return self.name
 
 
+class EventManager(models.Manager):
+    def get_upcoming(self):
+        qs = self.get_queryset()
+        return qs.filter(schedules__time__gt=timezone.now()).filter(is_done=False)
+
+    def get_current(self):
+        qs = self.get_queryset()
+        return qs.filter(schedules__time__lte=timezone.now()).filter(is_done=False)
+
+
 class Event(models.Model):
     name = models.CharField(max_length=30, primary_key=True,
                             help_text='The name of the event.')
@@ -23,6 +34,7 @@ class Event(models.Model):
                   'event is a major event.')
     is_done = models.BooleanField(
         help_text='A boolean to represent whether this event is done.')
+    objects = EventManager()
 
     def __unicode__(self):
         return self.name
