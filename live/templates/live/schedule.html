@@ -15,42 +15,16 @@
   <div class="schedule-container">
     <div id="majorg" class="col s12">
       <ul class="collapsible popout" data-collapsible="expandable">
-        <li>
-          <div class="collapsible-header">Arnis</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Basketball</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Cheerdance</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Dance Fusion</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Hataw Fitness</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Parade</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Pinoy Games</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Soccer</div>
-          <div></div>
-        </li>
-        <li>
-          <div class="collapsible-header">Volley</div>
-          <div></div>
-        </li>
+		{% for event in event_list %}
+		<li>
+			<div class="collapsible-header">{{ event.name }}</div>
+			<div class="collapsible-body">
+				{% for schedule in event.schedules.all %}
+				{{ schedule.time }}
+				{% endfor %}
+			</div>
+		</li>
+		{% endfor %}
       </ul>
     </div>
     <div id="minorg" class="col s12">
