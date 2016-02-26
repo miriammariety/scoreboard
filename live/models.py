@@ -6,6 +6,9 @@ from django.db import models
 class Cluster(models.Model):
     name = models.CharField(
         max_length=15, primary_key=True, help_text='The name of this cluster.')
+    image = models.ImageField(
+        upload_to='cluster_image', help_text='The image for this cluster.',
+        null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -42,8 +45,8 @@ class Match(models.Model):
     loser = models.ForeignKey(
         'Cluster', related_name='lost_matches', null=True, blank=True,
         help_text='The loser of this match.')
-    is_done = models.BooleanField(
-        help_text='A boolean to denote this match is over.')
+    start_time = models.DateTimeField(
+        help_text='The start time of this match.')
 
     class Meta:
         verbose_name_plural = 'matches'
@@ -65,9 +68,11 @@ class Rank(models.Model):
         (FOURTH, 'Fourth')
     )
     cluster = models.ForeignKey(
-        'Cluster', help_text='The cluster this rank belongs to.')
+        'Cluster', related_name='rankings',
+        help_text='The cluster this rank belongs to.')
     event = models.ForeignKey(
-        'Event', help_text='The event this rank belongs to.')
+        'Event', related_name='rankings',
+        help_text='The event this rank belongs to.')
     rank = models.SmallIntegerField(
         choices=RANKS, help_text='The rank for this cluster-event pair.')
 
@@ -76,3 +81,7 @@ class Rank(models.Model):
 
     def points(self):
         pass
+
+    def __unicode__(self):
+        return 'Rank {rank} - {cluster} - {event}'.format(
+            rank=self.rank, cluster=self.cluster, event=self.event)
