@@ -1,87 +1,71 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.utils import timezone
 
 
 class Cluster(models.Model):
-    name = models.CharField(max_length=15, primary_key=True,
-                            help_text='The name of the cluster.')
-    participated_events = models.ManyToManyField('Event', through='Score',
-                                                 related_name='clusters')
+    name = models.CharField(
+        max_length=15, primary_key=True, help_text='The name of this cluster.')
 
     def __unicode__(self):
         return self.name
-
-
-class EventManager(models.Manager):
-    def get_upcoming(self):
-        qs = self.get_queryset()
-        return qs.filter(schedules__time__gt=timezone.now()).filter(is_done=False)
-
-    def get_current(self):
-        qs = self.get_queryset()
-        return qs.filter(schedules__time__lte=timezone.now()).filter(is_done=False)
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=30, primary_key=True,
-                            help_text='The name of the event.')
-    location = models.CharField(max_length=30,
-                                help_text='The location of the event.')
+    name = models.CharField(
+        max_length=20, primary_key=True, help_text='The name of this event.')
+    location = models.CharField(
+        max_length=50, help_text='The location where this event is held.')
     is_major = models.BooleanField(
-        help_text='A boolean to represent whether this '
-                  'event is a major event.')
+        default=True,
+        help_text='A boolean to determine this event is a major event.')
+    start_time = models.DateTimeField(
+        help_text='The start time of this event.')
+
+
+class Match(models.Model):
+    event = models.ForeignKey(
+        'Event', related_name='matches',
+        help_text='The event this match belongs to.')
+    left = models.ForeignKey(
+        'Cluster', related_name='left_matches',
+        help_text='The left competitor.')
+    right = models.ForeignKey(
+        'Cluster', related_name='right_matches',
+        help_text='The right competitor.')
+    winner = models.ForeignKey(
+        'Cluster', related_name='won_matches', null=True, blank=True,
+        help_text='The winner of this match.')
+    loser = models.ForeignKey(
+        'Cluster', related_name='lost_matches', null=True, blank=True,
+        help_text='The loser of this match.')
     is_done = models.BooleanField(
-        help_text='A boolean to represent whether this event is done.')
-    objects = EventManager()
+        help_text='A boolean to denote this match is over.')
 
-    def __unicode__(self):
-        return self.name
+    class Meta:
+        verbose_name_plural = 'matches'
 
 
-class Score(models.Model):
-    NONE = 0
+class Rank(models.Model):
     FIRST = 1
     SECOND = 2
     THIRD = 3
     FOURTH = 4
-    PLACES = (
-        (NONE, 'None'),
-        (FIRST, '1st Place'),
-        (SECOND, '2nd Place'),
-        (THIRD, '3rd Place'),
-        (FOURTH, '4th Place')
+    RANKS = (
+        (FIRST, 'First'),
+        (SECOND, 'Second'),
+        (THIRD, 'Third'),
+        (FOURTH, 'Fourth')
     )
-    points = models.SmallIntegerField(
-        default=0, help_text='The points earned.')
-    cluster = models.ForeignKey('Cluster', related_name='scores',
-                                help_text='The cluster this score belongs to.')
+    cluster = models.ForeignKey(
+        'Cluster', help_text='The cluster this rank belongs to.')
     event = models.ForeignKey(
-        'Event', help_text='The event this score comes from.')
-    place = models.SmallIntegerField(
-        choices=PLACES, default=NONE,
-        help_text='The cluster\'s placement in this event.')
+        'Event', help_text='The event this rank belongs to.')
+    rank = models.SmallIntegerField(
+        choices=RANKS, help_text='The rank for this cluster-event pair.')
 
     class Meta:
-        unique_together = (('event', 'place'), ('event', 'cluster'))
+        unique_together = (('cluster', 'event'), ('event', 'rank'))
 
-    def __unicode__(self):
-        return '{0} points - {1} - {2}'.format(
-            self.points, self.event, self.cluster)
-
-    def save(self, *args, **kwargs):
-        place = self.place
-        is_major = self.event.is_major
-        if is_major:
-            scores = [0, 30, 25, 20, 15]
-        else:
-            scores = [0, 15, 12, 9, 6]
-        self.points = scores[place]
-        super(Score, self).save(*args, **kwargs)
-
-
-class Schedule(models.Model):
-    event = models.ForeignKey('Event', related_name='schedules',
-                              help_text='The event related to this schedule.')
-    time = models.DateTimeField(help_text='The time of the event.')
+    def points(self):
+        pass
