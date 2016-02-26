@@ -61,16 +61,4 @@
     </div>
   </div>
 </div>
-Upcoming: 
-{% for event in upcoming_events %}
-{{ event }} at {{ event.location }}<br>
-{% empty %}
-None
-{% endfor %}
-Ongoing:
-{% for event in ongoing_events %}
-{{ event }} at {{ event.location }}<br>
-{% empty %}
-None
-{% endfor %}
 {% endblock %}
