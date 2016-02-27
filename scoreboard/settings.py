@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'scoreboard.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'intrams$upcebuintrams2016',
+        'USER': 'intrams',
+        'PASSWORD': '|\'q3gYXhe#jZeur/*exy',
+        'HOST': 'intrams.mysql.pythonanywhere-services.com'
     }
 }
 
@@ -121,5 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = './static'
 MEDIA_ROOT = './media'
 MEDIA_URL = '/media/'
