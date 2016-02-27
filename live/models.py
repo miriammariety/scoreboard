@@ -52,7 +52,7 @@ class Match(models.Model):
         verbose_name_plural = 'matches'
 
     def __unicode__(self):
-        return '{left} v.s. {right} - {event}'.format(
+        return '{left} vs. {right} - {event}'.format(
             left=self.left, right=self.right, event=self.event)
 
 
