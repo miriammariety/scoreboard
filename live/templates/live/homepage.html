@@ -13,52 +13,88 @@
     <div class="col s12 m6 l4">
       <ul class="collapsible" data-collapsible="expandable">
         <h4 class="collapsible-head"><i class="fa fa-backward fa-fw"></i><span>Recent Games</span></h4>
+        {% for match in recent_games %}
+
         <li>
-          <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          <div class="collapsible-header">{{ match }}</div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="col s12">
+                <h6>Location: {{ match.event.location }}</h6>
+                <h6>Winner: {{ match.winner }}</h6>
+              </div>
+            </div>
+          </div>
         </li>
+
+        {% empty %}
         <li>
-          <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          <div><br>
+            <h6 style="text-align: center">No Recent Games</h6>
+          </div>
+          <br>
         </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
+
+        {% endfor %}
       </ul>
     </div><div class="col s12 m6 l4">
-      <ul class="collapsible" data-collapsible="expandable">
-        <h4 class="collapsible-head"><i class="fa fa-cog fa-spin fa-fw"></i><span>Ongoing Games</span></h4>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-      </ul>
-    </div><div class="col s12 m6 l4">
-      <ul class="collapsible" data-collapsible="expandable">
-        <h4 class="collapsible-head"><i class="fa fa-heartbeat fa-fw"></i><span>Upcoming Games</span></h4>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-      </ul>
-    </div>
+    <ul class="collapsible" data-collapsible="expandable">
+      <h4 class="collapsible-head"><i class="fa fa-cog fa-spin fa-fw"></i><span>Ongoing Games</span></h4>
+      {% for match in ongoing_games %}
+
+      <li>
+        <div class="collapsible-header">{{ match }}</div>
+        <div class="collapsible-body">
+          <div class="row">
+              <div class="col s12">
+                <h6>Location: {{ match.event.location }}</h6>
+                <h6>Started Since: {{ match.start_time|date:"F j o, f A"  }}</h6>
+              </div>
+            </div>
+        </div>
+      </li>
+
+      {% empty %}
+      <li>
+        <div><br>
+          <h6 style="text-align: center">No Ongoing Games</h6>
+        </div>
+        <br>
+      </li>
+
+      {% endfor %}
+
+    </ul>
+  </div><div class="col s12 m6 l4">
+    <ul class="collapsible" data-collapsible="expandable">
+      <h4 class="collapsible-head"><i class="fa fa-heartbeat fa-fw"></i><span>Upcoming Games</span></h4>
+      {% for match in upcoming_games %}
+
+      <li>
+        <div class="collapsible-header">{{ match }}</div>
+        <div class="collapsible-body">
+          <div class="row">
+              <div class="col s12">
+                <h6>Location: {{ match.event.location }}</h6>
+                <h6>Start Time: {{ match.start_time|date:"F j o, f A" }}</h6>
+              </div>
+            </div>
+        </div>
+      </li>
+
+      {% empty %}
+      <li>
+        <div><br>
+          <h6 style="text-align: center">No Upcoming Games</h6>
+        </div>
+        <br>
+      </li>
+
+      {% endfor %}
+
+
+    </ul>
+  </div>
   </div>
 </div>
 {% endblock %}
