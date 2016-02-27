@@ -1,0 +1,81 @@
+.navbar {
+	background-color: black;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.navbar li a:hover {
+    background-color: maroon;
+    color: white;
+}
+
+.tabs {
+	background-color: whitesmoke;
+}
+
+ul.tabs > li.tab > a {
+    color: grey;
+    font-weight: 600;
+}
+
+ul.tabs > li.tab > a:hover {
+    color: black;
+    font-weight: 600;
+}
+
+ul.tabs > div.indicator {
+    height: 5px;
+    background-color: grey;
+}
+
+.schedule-container {
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-left: 50px;
+}
+
+.par-img {
+    width:100%;
+    background-color: black;
+    height:300px;
+}
+
+.par-img > img{
+    max-height:100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.collection{
+    border: 0px;
+    color: white;
+    background-color: #424242;
+}
+
+ul.collection > li.collection-header{
+    border-bottom: 0px !important;
+    background-color: #424242 !important;
+}
+
+ul.collection > li.collection-item{
+    border-bottom: 0px;
+    background-color: #424242;
+}
+
+.collapsible{
+    color: white;
+    background-color: #424242 !important;
+}
+div.collapsible-header{
+    background-color: #424242 !important;
+}
+
+div.collapsible-header:hover{
+    background-color: #616161 !important;
+    color: white;
+}
+
+.collapsible-head{
+    padding-left: 5px;
+}
+

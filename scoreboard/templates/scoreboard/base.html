@@ -1,0 +1,73 @@
+{%load staticfiles%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %} {% endblock %}</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"  type="text/css" media="projection, screen">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600italic,600,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+  <link href="{% static 'scoreboard/css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'scoreboard/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
+  <link href="{% static 'scoreboard/css/style.css' %}" type="text/css" rel="stylesheet">
+  {% block css %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar" role="navigation">
+  <ul class="right hide-on-med-and-down">
+    <li><a href="#">SCOREBOARD</a></li>
+    <li><a href="#">SCHEDULE</a></li>
+    <li><a href="#">GALLERY</a></li>
+  </ul>
+  <ul id="nav-mobile" class="side-nav">
+    <li><a href="#">SCOREBOARD</a></li>
+    <li><a href="#">SCHEDULE</a></li>
+    <li><a href="#">GALLERY</a></li>
+  </ul>
+  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+</nav>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'live/js/materialize.min.js' %}"></script>
+<script src="{% static 'live/js/init.js' %}"></script>
+{% block script %} {% endblock %}
+</body>
+<footer class="page-footer grey darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Brought to you by:</h5>
+        <p class="grey-text text-lighten-4">
+            UP Cebu Student Council
+          <br>
+            UP Cebu P.E. Department
+          <br>
+            UP Intrams 2016 Intrams Committee
+          <br>
+            UPCSC Sports Committee
+        </p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Special thanks to:</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="#!">Souperteam</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Channelfix.com</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Chef on Demand</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright gre darken-4">
+    <div class="container">
+      &copy; 2016 Souperteam Development
+      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+    </div>
+  </div>
+</footer>
+</html>

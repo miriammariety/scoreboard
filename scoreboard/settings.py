@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'live',
+    'scoreboard',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 
 USE_I18N = True
 
