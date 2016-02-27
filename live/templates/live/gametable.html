@@ -1,11 +1,28 @@
-{% load static files %}
-<h4 class="center">GAME NAME</h4>
-<table>
-  <thead>
-    <tr>
-      <th>Time</th>
-      <th>Date</th>
-      <th>Match</th>
-    </tr>
-  </thead>
-</table>
+{% load staticfiles %}
+<div class="col l6 m6 s12" style="border-left: 5px solid grey;">
+  <div>
+    <h5 class="center">{{event.name}}</h5>
+    <div class="center">
+      <span><i class="fa fa-map-marker fa-fw"></i>{{event.location}}</span>
+    </div>
+  </div>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Date & Time</th>
+        <th>Match</th>
+        <th>Winner</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for match in event.matches.all %}
+      <tr>
+        <td>{{match.start_time|date:"F j o, f A"}}</td>
+        <td>{{match.left}} vs. {{match.right}}</td>
+        <td><b>{{match.winner|default:"--"}}</b></td>
+      </tr>
+    {% empty %}
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
