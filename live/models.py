@@ -4,8 +4,10 @@ from django.db import models
 
 
 class Cluster(models.Model):
+    slug = models.SlugField(primary_key=True)
     name = models.CharField(
-        max_length=30, primary_key=True, help_text='The name of this cluster.')
+        max_length=30, help_text='The name of this cluster.')
+    team_name = models.CharField(max_length=30, help_text='The team name.')
     image = models.ImageField(
         upload_to='cluster_image', help_text='The image for this cluster.',
         null=True, blank=True)
@@ -15,8 +17,9 @@ class Cluster(models.Model):
 
 
 class Event(models.Model):
+    slug = models.SlugField(primary_key=True)
     name = models.CharField(
-        max_length=30, primary_key=True, help_text='The name of this event.')
+        max_length=30, help_text='The name of this event.')
     location = models.CharField(
         max_length=50, help_text='The location where this event is held.')
     is_major = models.BooleanField(
