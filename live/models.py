@@ -78,7 +78,7 @@ class Rank(models.Model):
         help_text='The event this rank belongs to.')
     rank = models.SmallIntegerField(
         choices=RANKS, help_text='The rank for this cluster-event pair.',
-        default=0)
+        default=0, blank=True)
 
     class Meta:
         unique_together = (('cluster', 'event'), ('event', 'rank'))
