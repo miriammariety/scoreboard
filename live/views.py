@@ -41,10 +41,10 @@ class ClusterPageView(DetailView):
         event_stat = {}
 
         for event in events:
-            win = event.objects.filter(matches__winner=self.object)
-            loss = event.objects.filter(matches__loser=self.object)
-            event_stat[event] = ( win, loss )
-
+            win = event.matches.filter(winner=self.object).count()
+            loss = event.matches.filter(loser=self.object).count()
+            rank = event.rankings.get(cluster=self.object).rank
+            event_stat[event] = ( win, loss, rank )
         context['event_stat'] = event_stat
 
         return context
