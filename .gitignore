@@ -3,3 +3,4 @@
 *.xml
 db.sqlite3
 live/migrations
+media
