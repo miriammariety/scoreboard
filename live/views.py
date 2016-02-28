@@ -4,7 +4,7 @@ from django.utils import timezone
 from .models import Match
 from django.db.models import Q
 
-from live.models import Event, Cluster
+from live.models import Event, Cluster, Rank
 
 class HomeView(TemplateView):
     template_name = 'live/homepage.html'
@@ -38,3 +38,6 @@ class ScoreboardView(ListView):
     template_name = 'live/scoreboard.html'
     model = Event
     context_object_name = 'event_list'
+
+
+
