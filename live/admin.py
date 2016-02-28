@@ -10,7 +10,7 @@ class MatchInline(admin.TabularInline):
 
 class RankInline(admin.TabularInline):
     model = Rank
-    readonly_fields = ('cluster', 'rank')
+    readonly_fields = ('cluster', 'rank', 'points')
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -32,14 +32,14 @@ class EventAdmin(admin.ModelAdmin):
                     # check if the loser has lost before
                     if event.matches.filter(loser=loser).exists():
                         last_rank = event.rankings.values_list(
-                            'rank', flat=True).order_by('rank').first() or 5
+                            'rank', flat=True).order_by('rank').first() or \
+                            Cluster.objects.count() + 1
                         next_rank = last_rank - 1
                         loser.rankings.create(event=event, rank=next_rank)
                         if next_rank == 2:
                             match.winner.rankings.create(event=event, rank=1)
 
         formset.save()
-
 
 
 admin.site.register(Cluster)
