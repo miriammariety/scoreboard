@@ -5,7 +5,7 @@ from django.db import models
 
 class Cluster(models.Model):
     name = models.CharField(
-        max_length=15, primary_key=True, help_text='The name of this cluster.')
+        max_length=30, primary_key=True, help_text='The name of this cluster.')
     image = models.ImageField(
         upload_to='cluster_image', help_text='The image for this cluster.',
         null=True, blank=True)
@@ -16,7 +16,7 @@ class Cluster(models.Model):
 
 class Event(models.Model):
     name = models.CharField(
-        max_length=20, primary_key=True, help_text='The name of this event.')
+        max_length=30, primary_key=True, help_text='The name of this event.')
     location = models.CharField(
         max_length=50, help_text='The location where this event is held.')
     is_major = models.BooleanField(
