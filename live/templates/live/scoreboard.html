@@ -3,5 +3,11 @@
 {% block title %} Intrams 2016 | Scoreboard {% endblock %}
 
 {% block content %}
-
+<div class="row">
+  {% for cluster in clusters %}
+  <div class="col s3 push-l3 grey">
+    {{cluster.name}}
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
