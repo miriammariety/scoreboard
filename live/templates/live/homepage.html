@@ -7,7 +7,13 @@
 <div class="par-img">
   <img class="responsive-img" src="{% static 'live/images/bannerphoto.png' %}">
 </div>
-
+<div class="cluster-banner row">
+  {% for cluster in clusters %}
+  <div class="col s12 m6 l3">
+    <a href="{% url "live:cluster" cluster.pk %}"><img src="{{cluster.image.url}}" alt="" width="100%"></a>
+  </div>
+  {% endfor %}
+</div>
 <div class="schedule-container">
   <div class="row">
     <div class="col s12 m6 l4">
@@ -19,9 +25,14 @@
           <div class="collapsible-header">{{ match }}</div>
           <div class="collapsible-body">
             <div class="row">
+              <div class="col l3 m3 s3">
+
+              </div>
+            </div>
+            <div class="row">
               <div class="col s12">
-                <h6>Location: {{ match.event.location }}</h6>
-                <h6>Winner: {{ match.winner }}</h6>
+                <h6><i class="fa fa-map-marker fa-fw"></i>Location: {{ match.event.location }}</h6>
+                <h6><i class="fa fa-trophy fa-fw"></i>Winner: {{ match.winner }}</h6>
               </div>
             </div>
           </div>
@@ -47,8 +58,8 @@
         <div class="collapsible-body">
           <div class="row">
               <div class="col s12">
-                <h6>Location: {{ match.event.location }}</h6>
-                <h6>Started Since: {{ match.start_time|date:"F j o, f A"  }}</h6>
+                <h6><i class="fa fa-map-marker fa-fw"></i>Location: {{ match.event.location }}</h6>
+                <h6><i class="fa fa-clock-o fa-fw"></i>Started Since: {{ match.start_time|date:"F j o, f A"  }}</h6>
               </div>
             </div>
         </div>
@@ -75,8 +86,8 @@
         <div class="collapsible-body">
           <div class="row">
               <div class="col s12">
-                <h6>Location: {{ match.event.location }}</h6>
-                <h6>Start Time: {{ match.start_time|date:"F j o, f A" }}</h6>
+                <h6><i class="fa fa-map-marker fa-fw"></i>Location: {{ match.event.location }}</h6>
+                <h6><i class="fa fa-clock-o fa-fw"></i>Start Time: {{ match.start_time|date:"F j o, f A" }}</h6>
               </div>
             </div>
         </div>
