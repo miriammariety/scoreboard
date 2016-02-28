@@ -64,10 +64,15 @@ ul.collection > li.collection-item{
 
 .collapsible{
     color: white;
+    background-color: #212121 !important;
+}
+
+div.collapsible-body{
     background-color: #424242 !important;
 }
+
 div.collapsible-header{
-    background-color: #424242 !important;
+    background-color: #212121 !important;
 }
 
 div.collapsible-header:hover{
@@ -77,6 +82,10 @@ div.collapsible-header:hover{
 
 .collapsible-head{
     padding-left: 5px;
+}
+
+.cluster-banner{
+    background-color: black;
 }
 
 
