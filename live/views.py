@@ -33,6 +33,25 @@ class ScheduleView(ListView):
 class ClusterPageView(DetailView):
     template_name = 'live/specpages/clusterpage.html'
     model = Cluster
+    context_object_name = 'cluster'
+
+    def get_context_data(self, **kwargs):
+        context = super(ClusterPageView, self).get_context_data(**kwargs)
+        events = self.get_events()
+        event_stat = {}
+
+        for event in events:
+            win = event.matches.filter(winner=self.object).count()
+            loss = event.matches.filter(loser=self.object).count()
+            rank = event.rankings.get(cluster=self.object).rank
+            event_stat[event] = ( win, loss, rank )
+        context['event_stat'] = event_stat
+
+        return context
+
+    def get_events(self):
+        return Event.objects.filter(Q(matches__left=self.object)|Q(matches__right=self.object))
+
 
 class ScoreboardView(ListView):
     template_name = 'live/scoreboard.html'
