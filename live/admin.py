@@ -14,6 +14,7 @@ class RankInline(admin.TabularInline):
 
 
 class EventAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name', )}
     inlines = [MatchInline, RankInline]
     list_display = ('name', 'location', 'start_time', 'is_major')
 
@@ -41,6 +42,9 @@ class EventAdmin(admin.ModelAdmin):
         formset.save()
 
 
+class ClusterAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('team_name', )}
 
-admin.site.register(Cluster)
+
+admin.site.register(Cluster, ClusterAdmin)
 admin.site.register(Event, EventAdmin)
