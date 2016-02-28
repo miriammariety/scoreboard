@@ -2,3 +2,4 @@
 *.idea
 *.xml
 db.sqlite3
+live/migrations
