@@ -10,7 +10,6 @@ class MatchInline(admin.TabularInline):
 
 class RankInline(admin.TabularInline):
     model = Rank
-    readonly_fields = ('cluster', 'rank', 'points')
 
 
 class EventAdmin(admin.ModelAdmin):
