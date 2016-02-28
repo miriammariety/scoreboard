@@ -3,5 +3,19 @@
 {% block title %} Intrams 2016 | Scoreboard {% endblock %}
 
 {% block content %}
+<div class="row">
+  {% for cluster in clusters %}
+  <div class="col s2 push-l4 grey white-text darken-4 center" style="border: 1px solid white">
+    <div style="padding-top: 20px">
+      <img src="{{cluster.image.url}}" alt="" class="circle" width="25%">
+    </div>
+    <div class="cluster-label">{{cluster.team_name}}</div>
+  </div>
+  {% endfor %}
+</div>
+{% for event in event_list %}
+<div class="row scoreboard-row">
 
+</div>
+{% endfor %}
 {% endblock %}
