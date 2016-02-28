@@ -10,7 +10,7 @@
 <div class="cluster-banner row">
   {% for cluster in clusters %}
   <div class="col s12 m6 l3">
-    <a href=""><img src="{{cluster.image.url}}" alt="" width="100%"></a>
+    <a href="{% url "live:cluster" cluster.pk %}"><img src="{{cluster.image.url}}" alt="" width="100%"></a>
   </div>
   {% endfor %}
 </div>

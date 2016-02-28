@@ -51,3 +51,9 @@ class ClusterPageView(DetailView):
 
     def get_events(self):
         return Event.objects.filter(Q(matches__left=self.object)|Q(matches__right=self.object))
+
+
+class ScoreboardView(ListView):
+    template_name = 'live/scoreboard.html'
+    model = Event
+    context_object_name = 'event_list'
