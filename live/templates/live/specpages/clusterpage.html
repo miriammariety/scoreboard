@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-    {% for event, stat in event_stat %}
+    {% for event, stat in event_stat.items %}
       {% include "live/specpages/eventstat.html" %}
     {% endfor %}
     </tbody>
