@@ -14,18 +14,18 @@
   </ul>
   <div class="schedule-container">
     <div id="majorg" class="col s12">
-      <ul class="collapsible popout" data-collapsible="expandable">
-		{% for event in event_list %}
-		<li>
-			<div class="collapsible-header">{{ event.name }}</div>
-			<div class="collapsible-body">
-				{% for schedule in event.schedules.all %}
-				{{ schedule.time }}
-				{% endfor %}
-			</div>
-		</li>
-		{% endfor %}
-      </ul>
+      <div class="row">
+        {% for event in event_list %}
+          {% if forloop.counter|divisibleby:2 %}
+          <div class="row">
+            {% include "live/partials/gametable.html" %}
+          </div>
+          {% else %}
+            {% include "live/partials/gametable.html" %}
+          {% endif %}
+        {% empty %}
+        {% endfor %}
+      </div>
     </div>
     <div id="minorg" class="col s12">
       <ul class="collapsible popout" data-collapsible="expandable">
