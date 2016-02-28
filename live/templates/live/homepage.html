@@ -14,13 +14,14 @@
   </div>
   {% endfor %}
 </div>
+
 <div class="schedule-container">
   <div class="row">
     <div class="col s12 m6 l4">
       <ul class="collapsible" data-collapsible="expandable">
         <h4 class="collapsible-head"><i class="fa fa-backward fa-fw"></i><span>Recent Games</span></h4>
-        {% for match in recent_games %}
 
+        {% for match in recent_games|slice:":5" %}
         <li>
           <div class="collapsible-header">{{ match }}</div>
           <div class="collapsible-body">
@@ -39,6 +40,7 @@
         </li>
 
         {% empty %}
+
         <li>
           <div><br>
             <h6 style="text-align: center">No Recent Games</h6>
@@ -47,65 +49,87 @@
         </li>
 
         {% endfor %}
-      </ul>
-    </div><div class="col s12 m6 l4">
-    <ul class="collapsible" data-collapsible="expandable">
-      <h4 class="collapsible-head"><i class="fa fa-cog fa-spin fa-fw"></i><span>Ongoing Games</span></h4>
-      {% for match in ongoing_games %}
 
-      <li>
-        <div class="collapsible-header">{{ match }}</div>
-        <div class="collapsible-body">
-          <div class="row">
+        {% if recent_games %}
+        <li>
+          <div class="collapsible-header"><a href="{% url "live:schedule"%}" class="white-text">See More<i class="material-icons right">send</i></a></div>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+    <div class="col s12 m6 l4">
+      <ul class="collapsible" data-collapsible="expandable">
+        <h4 class="collapsible-head"><i class="fa fa-cog fa-spin fa-fw"></i><span>Ongoing Games</span></h4>
+
+        {% for match in ongoing_games|slice:":5" %}
+        <li>
+          <div class="collapsible-header">{{ match }}</div>
+          <div class="collapsible-body">
+            <div class="row">
               <div class="col s12">
                 <h6><i class="fa fa-map-marker fa-fw"></i>Location: {{ match.event.location }}</h6>
                 <h6><i class="fa fa-clock-o fa-fw"></i>Started Since: {{ match.start_time|date:"F j o, f A"  }}</h6>
               </div>
             </div>
-        </div>
-      </li>
+          </div>
+        </li>
 
-      {% empty %}
-      <li>
-        <div><br>
-          <h6 style="text-align: center">No Ongoing Games</h6>
-        </div>
-        <br>
-      </li>
+        {% empty %}
 
-      {% endfor %}
+        <li>
+          <div><br>
+            <h6 style="text-align: center">No Ongoing Games</h6>
+          </div>
+          <br>
+        </li>
 
-    </ul>
-  </div><div class="col s12 m6 l4">
-    <ul class="collapsible" data-collapsible="expandable">
-      <h4 class="collapsible-head"><i class="fa fa-heartbeat fa-fw"></i><span>Upcoming Games</span></h4>
-      {% for match in upcoming_games %}
+        {% endfor %}
 
-      <li>
-        <div class="collapsible-header">{{ match }}</div>
-        <div class="collapsible-body">
-          <div class="row">
+        {% if ongoing_games %}
+        <li>
+          <div class="collapsible-header"><a href="{% url "live:schedule"%}" class="white-text">See More<i class="material-icons right">send</i></a></div>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+    <div class="col s12 m6 l4">
+      <ul class="collapsible" data-collapsible="expandable">
+        <h4 class="collapsible-head"><i class="fa fa-heartbeat fa-fw"></i><span>Upcoming Games</span></h4>
+
+        {% for match in upcoming_games|slice:":5" %}
+        <li>
+          <div class="collapsible-header">{{ match }}</div>
+          <div class="collapsible-body">
+            <div class="row">
               <div class="col s12">
                 <h6><i class="fa fa-map-marker fa-fw"></i>Location: {{ match.event.location }}</h6>
                 <h6><i class="fa fa-clock-o fa-fw"></i>Start Time: {{ match.start_time|date:"F j o, f A" }}</h6>
               </div>
             </div>
-        </div>
-      </li>
+          </div>
+        </li>
 
-      {% empty %}
-      <li>
-        <div><br>
-          <h6 style="text-align: center">No Upcoming Games</h6>
-        </div>
-        <br>
-      </li>
+        {% empty %}
 
-      {% endfor %}
+        <li>
+          <div><br>
+            <h6 style="text-align: center">No Upcoming Games</h6>
+          </div>
+          <br>
+        </li>
 
+        {% endfor %}
 
-    </ul>
-  </div>
+        {% if upcoming_games %}
+        <li>
+          <div class="collapsible-header"><a href="{% url "live:schedule"%}" class="white-text">See More<i class="material-icons right">send</i></a></div>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
   </div>
 </div>
 {% endblock %}
