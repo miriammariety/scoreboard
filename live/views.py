@@ -33,3 +33,8 @@ class ScheduleView(ListView):
 class ClusterPageView(DetailView):
     template_name = 'live/specpages/clusterpage.html'
     model = Cluster
+
+class ScoreboardView(ListView):
+    template_name = 'live/scoreboard.html'
+    model = Event
+    context_object_name = 'event_list'
