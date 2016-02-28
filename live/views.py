@@ -38,10 +38,10 @@ class ScheduleView(ListView):
         return context
 
     def get_major(self):
-        return Event.objects.filter(is_major=True)
+        return Event.objects.filter(is_major=True).filter(matches__isnull=false)
 
     def get_minor(self):
-        return Event.objects.filter(is_major=False)
+        return Event.objects.filter(is_major=False).filter(matches__isnull=false)
 
     def get_special(self):
         return Event.objects.filter(matches__isnull=True)
