@@ -4,7 +4,7 @@ from django.utils import timezone
 from .models import Match
 from django.db.models import Q
 
-from live.models import Event, Cluster
+from live.models import Event, Cluster, Rank
 
 class HomeView(TemplateView):
     template_name = 'live/homepage.html'
@@ -43,7 +43,12 @@ class ClusterPageView(DetailView):
         for event in events:
             win = event.matches.filter(winner=self.object).count()
             loss = event.matches.filter(loser=self.object).count()
-            rank = event.rankings.get(cluster=self.object).rank
+
+            try:
+                rank = event.rankings.get(cluster=self.object).rank
+            except Rank.DoesNotExist:
+                rank = "--"
+
             event_stat[event] = ( win, loss, rank )
         context['event_stat'] = event_stat
 
