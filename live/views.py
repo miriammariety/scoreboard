@@ -30,6 +30,23 @@ class ScheduleView(ListView):
     model = Event
     context_object_name = 'event_list'
 
+    def get_context_data(self, **kwargs):
+        context = super(ScheduleView, self).get_context_data(**kwargs)
+        context['major_events'] = self.get_major()
+        context['minor_events'] = self.get_minor()
+        context['special_events'] = self.get_special()
+        return context
+
+    def get_major(self):
+        return Event.objects.filter(is_major=True)
+
+    def get_minor(self):
+        return Event.objects.filter(is_major=False)
+
+    def get_special(self):
+        return Event.objects.filter(matches__isnull=True)
+
+
 class ClusterPageView(DetailView):
     template_name = 'live/specpages/clusterpage.html'
     model = Cluster

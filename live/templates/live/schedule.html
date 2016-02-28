@@ -6,16 +6,19 @@
 <div>
   <ul class="tabs">
     <li id="majorg-tab" class="tab col s6">
-      <a href="#majorg" class="active" >Major Games</a>
+      <a href="#majorg" class="active" >Major Events</a>
     </li>
     <li id="minorg-tab" class="tab col s6">
-      <a href="#minorg" class="active">Minor Games</a>
+      <a href="#minorg" class="active">Minor Events</a>
+    </li>
+    <li id="specialg-tab" class="tab col s6">
+      <a href="#specialg" class="active">Special Events</a>
     </li>
   </ul>
   <div class="schedule-container">
     <div id="majorg" class="col s12">
       <div class="row">
-        {% for event in event_list %}
+        {% for event in major_events %}
           {% if forloop.counter|divisibleby:2 %}
           <div class="row">
             {% include "live/partials/gametable.html" %}
@@ -28,9 +31,32 @@
       </div>
     </div>
     <div id="minorg" class="col s12">
-      <ul class="collapsible popout" data-collapsible="expandable">
-
-      </ul>
+      <div class="row">
+        {% for event in minor_events %}
+          {% if forloop.counter|divisibleby:2 %}
+          <div class="row">
+            {% include "live/partials/gametable.html" %}
+          </div>
+          {% else %}
+            {% include "live/partials/gametable.html" %}
+          {% endif %}
+        {% empty %}
+        {% endfor %}
+      </div>
+    </div>
+    <div id="specialg" class="col s12">
+      <div class="row">
+        {% for event in special_events %}
+          {% if forloop.counter|divisibleby:2 %}
+          <div class="row">
+            {% include "live/partials/gametable.html" %}
+          </div>
+          {% else %}
+            {% include "live/partials/gametable.html" %}
+          {% endif %}
+        {% empty %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
