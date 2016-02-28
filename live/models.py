@@ -77,13 +77,19 @@ class Rank(models.Model):
         'Event', related_name='rankings',
         help_text='The event this rank belongs to.')
     rank = models.SmallIntegerField(
-        choices=RANKS, help_text='The rank for this cluster-event pair.')
+        choices=RANKS, help_text='The rank for this cluster-event pair.',
+        default=0)
 
     class Meta:
         unique_together = (('cluster', 'event'), ('event', 'rank'))
 
+    @property
     def points(self):
-        pass
+        if self.event.is_major:
+            points = [0, 30, 25, 20, 15]
+        else:
+            points = [0, 15, 12, 9, 6]
+        return points[self.rank]
 
     def __unicode__(self):
         return 'Rank {rank} - {cluster} - {event}'.format(
