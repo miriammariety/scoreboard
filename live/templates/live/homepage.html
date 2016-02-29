@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col s12 m6 l4">
       <ul class="collapsible" data-collapsible="expandable">
-        <h4 class="collapsible-head"><i class="fa fa-backward fa-fw"></i><span>Recent Games</span></h4>
+        <h5 class="collapsible-head event-mode"><i class="fa fa-backward fa-fw"></i><span>Recent Games</span></h5>
 
         {% for match in recent_games|slice:":5" %}
         <li>
@@ -52,7 +52,7 @@
     </div>
     <div class="col s12 m6 l4">
       <ul class="collapsible" data-collapsible="expandable">
-        <h4 class="collapsible-head"><i class="fa fa-cog fa-spin fa-fw"></i><span>Ongoing Games</span></h4>
+        <h5 class="collapsible-head event-mode"><i class="fa fa-cog fa-spin fa-fw"></i><span>Ongoing Games</span></h5>
 
         {% for match in ongoing_games|slice:":5" %}
         <li>
@@ -88,7 +88,7 @@
     </div>
     <div class="col s12 m6 l4">
       <ul class="collapsible" data-collapsible="expandable">
-        <h4 class="collapsible-head"><i class="fa fa-heartbeat fa-fw"></i><span>Upcoming Games</span></h4>
+        <h5 class="collapsible-head event-mode"><i class="fa fa-heartbeat fa-fw"></i><span>Upcoming Games</span></h5>
 
         {% for match in upcoming_games|slice:":5" %}
         <li>
@@ -127,13 +127,13 @@
 
 
 <div class="cluster-banner row">
-  <h4 class="center white-text grey darken-4" style="padding-top: 10px; padding-bottom: 10px">CLUSTERS</h4>
+  <h4 class="center white-text grey darken-4 cluster-header" style="padding-top: 10px; padding-bottom: 10px">UP CEBU CLUSTERS</h4>
   {% for cluster in clusters %}
   <div class="col s12 m6 l3 center">
     <a href="{% url "live:cluster" cluster.pk %}">
       <img class="circle" src="{{cluster.image.url}}" alt="" width="50%">
     </a>
-    <h5>{{cluster.team_name}}</h5>
+    <h6 class="cluster-name-home">{{cluster.team_name}}</h6>
   </div>
   {% endfor %}
 </div>
