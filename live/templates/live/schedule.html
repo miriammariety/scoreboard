@@ -49,10 +49,10 @@
         {% for event in special_events %}
           {% if forloop.counter|divisibleby:2 %}
           <div class="row">
-            {% include "live/partials/gametable.html" %}
+            {% include "live/partials/gametable_schedule.html" %}
           </div>
           {% else %}
-            {% include "live/partials/gametable.html" %}
+            {% include "live/partials/gametable_schedule.html" %}
           {% endif %}
         {% empty %}
         {% endfor %}
