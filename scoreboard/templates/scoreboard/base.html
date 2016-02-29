@@ -17,13 +17,13 @@
 <nav class="navbar" role="navigation">
   <ul class="right hide-on-med-and-down">
     <li><a href="{% url "live:home" %}">HOME</a></li>
-    <li><a href="#">SCOREBOARD</a></li>
+    <li><a href="{% url "live:scoreboard" %}">SCOREBOARD</a></li>
     <li><a href="{% url "live:schedule" %}">SCHEDULE</a></li>
     <li><a href="#" class="dropdown-button" data-activates="clusterdrop">CLUSTERS<i class="material-icons right">arrow_drop_down</i></a></li>
   </ul>
   <ul id="nav-mobile" class="side-nav">
     <li><a href="{% url "live:home" %}">HOME</a></li>
-    <li><a href="#">SCOREBOARD</a></li>
+    <li><a href="{% url "live:scoreboard" %}">SCOREBOARD</a></li>
     <li><a href="{% url "live:schedule" %}">SCHEDULE</a></li>
     <li><a href="#" class="dropdown-button" data-activates="clusterdrop">CLUSTERS<i class="material-icons right">arrow_drop_down</i></a></li>
   </ul>
