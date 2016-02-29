@@ -13,10 +13,10 @@
   </div>
   {% endfor %}
 </div>
-{% for event, scores in scores.items %}
+{% for event, scores in event_scores.iteritems %}
 <div class="scoreboard-row row">
   <div class="col s4 m4 l4">
-    <div class="cluster-label">{{event.name}}</div>
+    <div class="cluster-label">{{ event.name }}</div>
   </div>
   {% for score in scores %}
   <div class="col s2 m2 l2 center">

@@ -1,3 +1,5 @@
+import collections
+
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.utils import timezone
@@ -69,7 +71,7 @@ class ClusterPageView(DetailView):
                 rank = "--"
 
             event_stat[event] = ( win, loss, rank )
-            
+
         context['event_stat'] = event_stat
 
         return context
@@ -81,16 +83,20 @@ class ClusterPageView(DetailView):
 class ScoreboardView(ListView):
     template_name = 'live/scoreboard.html'
     model = Event
-    context_object_name = 'event_list'
+    context_object_name = 'events'
+    ordering = ('name', )
 
     def get_context_data(self, **kwargs):
         context = super(ScoreboardView, self).get_context_data(**kwargs)
-        event_list = context['event_list']
+        ranks = Rank.objects.all()
+        events = context['events']
 
         scores = {}
-        for event in event_list:
-            scores[event] = event.rankings.order_by('cluster__name')
-        context['scores'] = scores
+        for event in events:
+            scores[event] = ranks.filter(event=event).order_by(
+                'cluster__team_name')
 
+        scores = collections.OrderedDict(sorted(scores.items()))
+        context['event_scores'] = scores
         return context
 
