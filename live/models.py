@@ -60,11 +60,13 @@ class Match(models.Model):
 
 
 class Rank(models.Model):
+    NONE = 0
     FIRST = 1
     SECOND = 2
     THIRD = 3
     FOURTH = 4
     RANKS = (
+        (NONE, 'None'),
         (FIRST, 'First'),
         (SECOND, 'Second'),
         (THIRD, 'Third'),
@@ -78,10 +80,10 @@ class Rank(models.Model):
         help_text='The event this rank belongs to.')
     rank = models.SmallIntegerField(
         choices=RANKS, help_text='The rank for this cluster-event pair.',
-        default=0, blank=True)
+        default=NONE)
 
     class Meta:
-        unique_together = (('cluster', 'event'), ('event', 'rank'))
+        unique_together = ('cluster', 'event')
 
     @property
     def points(self):
