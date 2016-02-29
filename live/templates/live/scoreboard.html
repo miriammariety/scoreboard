@@ -7,9 +7,9 @@
   {% for cluster in clusters %}
   <div class="col s2 m2 l2 push-l4 push-s4 push-m4 grey white-text darken-4 center" style="border: 1px solid white">
     <div style="padding-top: 20px">
-      <img src="{{cluster.image.url}}" alt="" class="circle" width="25%">
+      <a href="{% url "live:cluster" cluster.pk %}"><img src="{{cluster.image.url}}" alt="" class="circle" width="25%"></a>
     </div>
-    <div class="cluster-label">{{cluster.team_name}}</div>
+    <div class="cluster-label"><a href="{% url "live:cluster" cluster.pk %}" class = "white-text">{{cluster.team_name}}</a></div>
   </div>
   {% endfor %}
 </div>
