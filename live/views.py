@@ -93,7 +93,7 @@ class ScoreboardView(ListView):
 
         scores = {}
         for event in events:
-            scores[event] = ranks.filter(event=event).order_by(
+            scores[event.name] = ranks.filter(event=event).order_by(
                 'cluster__team_name')
 
         scores = collections.OrderedDict(sorted(scores.items()))
