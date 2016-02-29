@@ -38,13 +38,15 @@ class ScheduleView(ListView):
         return context
 
     def get_major(self):
-        return Event.objects.filter(is_major=True).filter(matches__isnull=False)
+        return Event.objects.filter(is_major=True).filter(
+            matches__isnull=False).distinct()
 
     def get_minor(self):
-        return Event.objects.filter(is_major=False).filter(matches__isnull=False)
+        return Event.objects.filter(is_major=False).filter(
+                matches__isnull=False).distinct()
 
     def get_special(self):
-        return Event.objects.filter(matches__isnull=True)
+        return Event.objects.filter(matches__isnull=True).distinct()
 
 
 class ClusterPageView(DetailView):
@@ -67,6 +69,7 @@ class ClusterPageView(DetailView):
                 rank = "--"
 
             event_stat[event] = ( win, loss, rank )
+            
         context['event_stat'] = event_stat
 
         return context
@@ -79,3 +82,14 @@ class ScoreboardView(ListView):
     template_name = 'live/scoreboard.html'
     model = Event
     context_object_name = 'event_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(ScoreboardView, self).get_context_data(**kwargs)
+        event_list = context['event_list']
+
+        scores = {}
+        for event in event_list:
+            scores[event] = event.rankings.order_by('cluster__name')
+        context['scores'] = scores
+        return context
+
