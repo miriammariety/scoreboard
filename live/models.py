@@ -15,6 +15,13 @@ class Cluster(models.Model):
     def __unicode__(self):
         return self.name
 
+    def points(self):
+        ranking = self.rankings.all()
+        sum = 0
+        for rank in ranking:
+            sum += rank.points
+
+        return sum
 
 class Event(models.Model):
     slug = models.SlugField(primary_key=True)

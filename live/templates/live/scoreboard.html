@@ -25,4 +25,14 @@
   {% endfor %}
 </div>
 {% endfor %}
+<div class="row">
+  <div class="col l4 m4 s4 grey white-text darken-4">
+    <b>TOTAL</b>
+  </div>
+  {% for cluster in clusters %}
+   <div class="col s2 m2 l2 grey white-text darken-4 center" style="border: 1px solid white">
+      <b><span>{{cluster.points|default:"--" }}</span></b>
+   </div>
+  {% endfor %}
+</div>
 {% endblock %}
