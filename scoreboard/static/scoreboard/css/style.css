@@ -100,3 +100,8 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.cluster-name{
+    font-weight: 500;
+    text-transform: uppercase;
+}
