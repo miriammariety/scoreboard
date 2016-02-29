@@ -10,13 +10,18 @@ class MatchInline(admin.TabularInline):
 
 class RankInline(admin.TabularInline):
     model = Rank
-    readonly_fields = ('cluster', 'rank', 'points')
 
 
 class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
     inlines = [MatchInline, RankInline]
     list_display = ('name', 'location', 'start_time', 'is_major')
+
+    def save_model(self, request, obj, form, change):
+        if not obj.rankings.exists():
+            cluster_rank = [Rank(cluster=cluster, event=obj) for cluster in Cluster.objects.all()]
+            obj.rankings.bulk_create(cluster_rank)
+            obj.save()
 
     def save_formset(self, request, form, formset, change):
         for matchform in formset:
@@ -33,12 +38,16 @@ class EventAdmin(admin.ModelAdmin):
                     # check if the loser has lost before
                     if event.matches.filter(loser=loser).exists():
                         last_rank = event.rankings.values_list(
-                            'rank', flat=True).order_by('rank').first() or \
+                            'rank', flat=True).order_by('-rank').first() or \
                             Cluster.objects.count() + 1
                         next_rank = last_rank - 1
-                        loser.rankings.create(event=event, rank=next_rank)
+                        rank_obj = loser.rankings.get(event=event)
+                        rank_obj.rank = next_rank
+                        rank_obj.save()
                         if next_rank == 2:
-                            match.winner.rankings.create(event=event, rank=1)
+                            rank_obj = match.winner.rankings.get(event=event)
+                            rank_obj.rank = 1
+                            rank_obj.save()
 
         formset.save()
 

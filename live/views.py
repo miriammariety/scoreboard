@@ -82,3 +82,14 @@ class ScoreboardView(ListView):
     template_name = 'live/scoreboard.html'
     model = Event
     context_object_name = 'event_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(ScoreboardView, self).get_context_data(**kwargs)
+        event_list = context['event_list']
+
+        scores = {}
+        for event in event_list:
+            scores[event] = event.rankings.order_by('cluster__name')
+        context['scores'] = scores
+        return context
+
