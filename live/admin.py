@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import transaction
+
 from live.models import Cluster, Event, Match, Rank
 
 
@@ -19,9 +21,16 @@ class EventAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not obj.rankings.exists():
-            cluster_rank = [Rank(cluster=cluster, event=obj) for cluster in Cluster.objects.all()]
-            obj.rankings.bulk_create(cluster_rank)
-            obj.save()
+            self._bulk_save(obj)
+
+    @transaction.atomic
+    def _bulk_save(self, obj):
+        cluster_rank = [Rank(cluster=cluster, event=obj) for cluster in Cluster.objects.all()]
+        for rank in cluster_rank:
+            rank.save()
+            obj.rankings.add(rank)
+        obj.save()
+
 
     def save_formset(self, request, form, formset, change):
         for matchform in formset:
