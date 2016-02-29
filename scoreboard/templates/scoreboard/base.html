@@ -19,22 +19,15 @@
     <li><a href="{% url "live:home" %}">HOME</a></li>
     <li><a href="{% url "live:scoreboard" %}">SCOREBOARD</a></li>
     <li><a href="{% url "live:schedule" %}">SCHEDULE</a></li>
-    <li><a href="#" class="dropdown-button" data-activates="clusterdrop">CLUSTERS<i class="material-icons right">arrow_drop_down</i></a></li>
   </ul>
   <ul id="nav-mobile" class="side-nav">
     <li><a href="{% url "live:home" %}">HOME</a></li>
     <li><a href="{% url "live:scoreboard" %}">SCOREBOARD</a></li>
     <li><a href="{% url "live:schedule" %}">SCHEDULE</a></li>
-    <li><a href="#" class="dropdown-button" data-activates="clusterdrop">CLUSTERS<i class="material-icons right">arrow_drop_down</i></a></li>
   </ul>
   <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 </nav>
-<ul id="clusterdrop" class="dropdown-content" >
-  {% for cluster in clusters %}
-  <li><a href="#">{{cluster.name}}</a></li>
-  {% empty %}
-  {% endfor %}
-</ul>
+
 <main>
   {% block content %}{% endblock %}
 </main>
@@ -60,12 +53,11 @@
         </p>
       </div>
       <div class="col l4 offset-l2 s12">
-        <h5 class="white-text">Special thanks to:</h5>
+        <h5 class="white-text">Powered By:</h5>
         <ul>
-          <li><a class="grey-text text-lighten-3" href="#!">Souperteam</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Channelfix.com</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Chef on Demand</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+          <li><a class="grey-text text-lighten-3" href="http://fb.com/souperteam">Souper Team</a></li>
+          <li><a class="grey-text text-lighten-3" href="http://channelfix.com/">Channelfix.com</a></li>
+          <li><a class="grey-text text-lighten-3" href="http://www.chefondemand.com.ph/">Chef on Demand</a></li>
         </ul>
       </div>
     </div>
@@ -73,7 +65,6 @@
   <div class="footer-copyright gre darken-4">
     <div class="container">
       &copy; 2016 Souperteam Development
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
     </div>
   </div>
 </footer>
