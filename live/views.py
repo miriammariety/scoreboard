@@ -38,13 +38,15 @@ class ScheduleView(ListView):
         return context
 
     def get_major(self):
-        return Event.objects.filter(is_major=True).filter(matches__isnull=False)
+        return Event.objects.filter(is_major=True).filter(
+            matches__isnull=False).distinct()
 
     def get_minor(self):
-        return Event.objects.filter(is_major=False).filter(matches__isnull=False)
+        return Event.objects.filter(is_major=False).filter(
+                matches__isnull=False).distinct()
 
     def get_special(self):
-        return Event.objects.filter(matches__isnull=True)
+        return Event.objects.filter(matches__isnull=True).distinct()
 
 
 class ClusterPageView(DetailView):
@@ -67,6 +69,7 @@ class ClusterPageView(DetailView):
                 rank = "--"
 
             event_stat[event] = ( win, loss, rank )
+            
         context['event_stat'] = event_stat
 
         return context
