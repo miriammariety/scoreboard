@@ -21,7 +21,7 @@ class EventAdmin(admin.ModelAdmin):
         if not obj.rankings.exists():
             cluster_rank = [Rank(cluster=cluster, event=obj) for cluster in Cluster.objects.all()]
             obj.rankings.bulk_create(cluster_rank)
-            obj.save()
+        obj.save()
 
     def save_formset(self, request, form, formset, change):
         for matchform in formset:
