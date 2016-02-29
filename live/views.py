@@ -91,5 +91,6 @@ class ScoreboardView(ListView):
         for event in event_list:
             scores[event] = event.rankings.order_by('cluster__name')
         context['scores'] = scores
+
         return context
 
