@@ -119,3 +119,29 @@ main {
 .cluster-header{
     font-weight: 500;
 }
+
+.pinned-headers {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.cluster-score-header {
+  border-left: 1px solid grey;
+}
+
+#arts-comm-bullets {
+  background-color: rgb(41, 58, 9);
+}
+
+#golden-scions {
+  background-color: rgb(163, 107, 14);
+}
+
+#management-tycoons {
+  background-color: rgb(62, 96, 119);
+}
+
+#soc-sci-stallions {
+  background-color: rgb(224, 32, 35);
+}

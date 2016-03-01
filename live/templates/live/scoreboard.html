@@ -3,9 +3,9 @@
 {% block title %} Intrams 2016 | Scoreboard {% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row headers grey darken-4">
   {% for cluster in clusters %}
-  <div class="col s2 m2 l2 push-l4 push-s4 push-m4 grey white-text darken-4 center" style="border: 1px solid white">
+  <div class="col s2 m2 l2 push-l4 push-s4 push-m4 white-text darken-4 center cluster-score-header" id="{{ cluster.pk }}">
     <div style="padding-top: 20px">
       <a href="{% url "live:cluster" cluster.pk %}"><img src="{{cluster.image.url}}" alt="" class="circle" width="25%"></a>
     </div>
