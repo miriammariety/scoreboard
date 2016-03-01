@@ -19,13 +19,16 @@ class HomeView(TemplateView):
         return context
 
     def get_ongoing(self):
-        return Match.objects.filter(start_time__lte=timezone.now()).filter(winner__isnull=True)
+        return Match.objects.filter(start_time__lte=timezone.now()).filter(
+            winner__isnull=True).order_by('start_time')
 
     def get_upcoming(self):
-        return Match.objects.filter(start_time__gt=timezone.now()).filter(winner__isnull=True)
+        return Match.objects.filter(start_time__gt=timezone.now()).filter(
+            winner__isnull=True).order_by('start_time')
 
     def get_recent(self):
-        return Match.objects.filter(start_time__lt=timezone.now()).filter(winner__isnull=False)
+        return Match.objects.filter(start_time__lt=timezone.now()).filter(
+            winner__isnull=False).order_by('-start_time')
 
 class ScheduleView(ListView):
     template_name = 'live/schedule.html'
