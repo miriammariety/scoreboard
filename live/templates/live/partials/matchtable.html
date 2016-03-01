@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<div class="col l6 m6 s12" style="border-left: 5px solid grey;">
+  <div>
+    <h5 class="center">{{ game.event.name }}</h5>
+    <div class="center">
+      <span>{{ game.left }} vs {{ game.right }}</span>
+      <span><i class="fa fa-map-marker fa-fw"></i>{{ game.event.location }}</span>
+    </div>
+  </div>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Date & Time</th>
+        <th>Winner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ game.start_time|date:"F j o, f A" }}</td>
+        <td><b>{{ game.winner|default:"--" }}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

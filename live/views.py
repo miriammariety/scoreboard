@@ -61,6 +61,9 @@ class ClusterPageView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ClusterPageView, self).get_context_data(**kwargs)
+        ongoing_games = self.get_ongoing_games()
+        upcoming_games = self.get_upcoming_games()
+        recent_games = self.get_recent_games()
 
         ranks = Rank.objects.all()
         cluster = context['cluster']
@@ -75,12 +78,36 @@ class ClusterPageView(DetailView):
             else:
                 wins = '--'
                 losses = '--'
-            print rank
-            print rank.rank
             stats[rank.event.name] = (wins, losses, rank.get_rank_display)
+
         context['stats'] = stats
+        context['ongoing_games'] = ongoing_games
+        context['recent_games'] = recent_games
+        context['upcoming_games'] = upcoming_games
 
         return context
+
+    def get_events(self):
+        return Event.objects.filter(Q(matches__left=self.object)|
+                                    Q(matches__right=self.object))
+
+    def get_ongoing_games(self):
+        return Match.objects.filter(Q(left=self.object)|
+                                    Q(right=self.object)).filter(
+                start_time__lte=timezone.now()).filter(
+                winner__isnull=True).order_by('start_time')
+
+    def get_upcoming_games(self):
+        return Match.objects.filter(Q(left=self.object)|
+                                    Q(right=self.object)).filter(
+                                        start_time__gt=timezone.now()).filter(
+                                    winner__isnull=True).order_by('start_time')
+
+    def get_recent_games(self):
+        return Match.objects.filter(Q(left=self.object)|
+                                    Q(right=self.object)).filter(
+                                        start_time__lt=timezone.now()).filter(
+                                  winner__isnull=False).order_by('-start_time')
 
 
 class ScoreboardView(ListView):

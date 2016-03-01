@@ -5,7 +5,7 @@
 {% block content %}
 <div class="parallax-container" style="height: 200% ;background: rgba(0, 0, 0, 0.30);">
   <div class="parallax"><img src="{% static 'live/images/1234.png' %}" ></div>
-    <div class="row">
+  <div class="row">
     <div class="col l2 m2 s2 push-l5" style="padding-top: 30px">
       <img class="circle" src="{{object.image.url}}" alt="" width="100%">
     </div>
@@ -15,10 +15,25 @@
     <span class="center"></span>
   </div>
 </div>
+<ul class="tabs" style="overflow:hidden">
+  <li class="tab col s3">
+    <a class="active" href="#stats">GAME STATS</a>
+  </li>
+  <li class="tab col s3">
+    <a href="#recent-games">RECENT GAMES</a>
+  </li>
+  <li class="tab col s3">
+    <a href="#ongoing-games">ONGOING GAMES</a>
+  </li>
+  <li class="tab col s3">
+    <a href="#upcoming-games">UPCOMING GAMES</a>
+  </li>
+</ul>
 <div class="schedule-container">
-  <h5 class="center">{{cluster.team_name}} Game Statistics</h5>
-  <table>
-    <thead>
+  <div id="stats" class="col s12">
+    <h5 class="center">{{cluster.team_name}} Game Statistics</h5>
+    <table>
+      <thead>
       <tr>
         <th data-field="event">Event</th>
         <th data-field="wins">Wins</th>
@@ -29,8 +44,48 @@
     <tbody>
     {% for event, stat in stats.items %}
       {% include "live/partials/clusterstat.html" %}
-    {% endfor %}
-    </tbody>
-  </table>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div id="upcoming-games" class="col s12">
+    <div class="row">
+      {% for game in upcoming_games%}
+        {% if forloop.counter|divisibleby:2 %}
+          <div class="row">
+            {% include 'live/partials/matchtable.html' %}
+          </div>
+        {% else %}
+          {% include 'live/partials/matchtable.html' %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div id="ongoing-games" class="col s12">
+    <div class="row">
+      {% for game in ongoing_games%}
+        {% if forloop.counter|divisibleby:2 %}
+          <div class="row">
+            {% include 'live/partials/matchtable.html' %}
+          </div>
+        {% else %}
+          {% include 'live/partials/matchtable.html' %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div id="recent-games" class="col s12">
+    <div class="row">
+      {% for game in recent_games%}
+        {% if forloop.counter|divisibleby:2 %}
+          <div class="row">
+            {% include 'live/partials/matchtable.html' %}
+          </div>
+        {% else %}
+          {% include 'live/partials/matchtable.html' %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}
