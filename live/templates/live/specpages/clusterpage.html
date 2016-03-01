@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-    {% for event, stat in event_stat.items %}
+    {% for event, stat in stats.items %}
       {% include "live/partials/clusterstat.html" %}
     {% endfor %}
     </tbody>

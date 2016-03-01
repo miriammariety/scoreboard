@@ -1,6 +1,6 @@
 <tr>
-  <td>{{ event.name }}</td>
+  <td>{{ event }}</td>
   <td>{{ stat.0 }}</td>
   <td>{{ stat.1 }}</td>
-  <td>{{ stat.2 }}</td>
+  <td>{{ stat.2|default:"--" }}</td>
 </tr>
