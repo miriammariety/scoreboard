@@ -163,3 +163,16 @@ main {
     color: #ffab00 !important;
     text-decoration: underline;
 }
+
+#schedule-tabs > div.indicator {
+    height: 5px;
+    background-color: maroon;
+}
+
+#schedule-tabs li a:hover{
+    color: #ffab00 !important;
+}
+
+#schedule-tabs li a{
+    color: #1b5e20;
+}
