@@ -61,26 +61,26 @@ class ClusterPageView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ClusterPageView, self).get_context_data(**kwargs)
-        events = self.get_events()
-        event_stat = {}
 
-        for event in events:
-            win = event.matches.filter(winner=self.object).count()
-            loss = event.matches.filter(loser=self.object).count()
+        ranks = Rank.objects.all()
+        cluster = context['cluster']
+        ranks = ranks.filter(cluster=cluster).order_by('event__name')
 
-            try:
-                rank = event.rankings.get(cluster=self.object).rank
-            except Rank.DoesNotExist:
-                rank = "--"
-
-            event_stat[event] = ( win, loss, rank )
-
-        context['event_stat'] = event_stat
+        stats = collections.OrderedDict()
+        for rank in ranks:
+            matches = rank.event.matches
+            if matches.exists():
+                wins = matches.filter(winner=cluster).count()
+                losses = matches.filter(loser=cluster).count()
+            else:
+                wins = '--'
+                losses = '--'
+            print rank
+            print rank.rank
+            stats[rank.event.name] = (wins, losses, rank.get_rank_display)
+        context['stats'] = stats
 
         return context
-
-    def get_events(self):
-        return Event.objects.filter(Q(matches__left=self.object)|Q(matches__right=self.object))
 
 
 class ScoreboardView(ListView):

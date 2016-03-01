@@ -73,7 +73,7 @@ class Rank(models.Model):
     THIRD = 3
     FOURTH = 4
     RANKS = (
-        (NONE, 'None'),
+        (NONE, ''),
         (FIRST, 'First'),
         (SECOND, 'Second'),
         (THIRD, 'Third'),
