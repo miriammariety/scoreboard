@@ -145,3 +145,34 @@ main {
 #soc-sci-stallions {
   background-color: rgb(224, 32, 35);
 }
+
+#cluster-tabs li a:hover{
+    color: #ffab00;
+}
+
+#cluster-tabs li a{
+    color: #1b5e20;
+}
+
+#cluster-tabs > div.indicator {
+    height: 5px;
+    background-color: maroon;
+}
+
+.partner-links a:hover {
+    color: #ffab00 !important;
+    text-decoration: underline;
+}
+
+#schedule-tabs > div.indicator {
+    height: 5px;
+    background-color: maroon;
+}
+
+#schedule-tabs li a:hover{
+    color: #ffab00 !important;
+}
+
+#schedule-tabs li a{
+    color: #1b5e20;
+}
