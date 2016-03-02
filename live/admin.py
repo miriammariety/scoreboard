@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db.models import Min
+
 from live.models import Cluster, Event, Match, Rank
 
 
@@ -37,9 +39,10 @@ class EventAdmin(admin.ModelAdmin):
                     event = match.event
                     # check if the loser has lost before
                     if event.matches.filter(loser=loser).exists():
-                        last_rank = event.rankings.values_list(
-                            'rank', flat=True).order_by('-rank').first() or \
-                            Cluster.objects.count() + 1
+                        last_rank = event.rankings.exclude(
+                            rank__exact=0).aggregate(Min('rank'))['rank__min']
+                        if not last_rank:
+                            last_rank = Cluster.objects.count() + 1
                         next_rank = last_rank - 1
                         rank_obj = loser.rankings.get(event=event)
                         rank_obj.rank = next_rank
