@@ -60,6 +60,8 @@ class Match(models.Model):
 
     class Meta:
         verbose_name_plural = 'matches'
+        ordering = ['start_time']
+
 
     def __unicode__(self):
         return '{left} vs. {right} - {event}'.format(
